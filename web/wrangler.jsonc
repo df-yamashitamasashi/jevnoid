@@ -1,0 +1,8 @@
+{
+  "name": "jevnoid",
+  "pages_build_output_dir": "./public",
+  "compatibility_date": "2026-09-26",
+  "kv_namespaces": [
+    { "binding": "VITALS", "id": "765a93d267064edc8cec7c2e2f5cf09f" }
+  ]
+}

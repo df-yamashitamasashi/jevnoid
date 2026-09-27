@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+
+# Secrets & Environment variables
+.env
+.secrets/
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.dist/
+dist/
+
+# AWS CDK
+cdk.out/
+.cdk.staging/
+cdk.context.json
+infrastructure/bin/*.js
+infrastructure/bin/*.d.ts
+infrastructure/lib/*.js
+infrastructure/lib/*.d.ts
+
+# Cloudflare Pages (snapshot is regenerated from KV at deploy time)
+web/.wrangler/
+web/public/vitals-snapshot.json
+
+# Local build artifacts
+lambda_layer/
+.pytest_cache/

@@ -1,0 +1,25 @@
+{
+  "name": "jevnoid-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK v2 infrastructure for Jevnoid Autonomous Digital Organism",
+  "bin": {
+    "jevnoid-app": "bin/jevnoid-app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "synth": "cdk synth --profile default",
+    "deploy": "cdk deploy --all --profile default"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.19",
+    "aws-cdk": "^2.130.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.130.0",
+    "constructs": "^10.3.0"
+  }
+}

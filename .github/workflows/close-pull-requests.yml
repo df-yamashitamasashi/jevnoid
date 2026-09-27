@@ -1,0 +1,22 @@
+name: "Auto Close Pull Requests (Fork Only Repository)"
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-close:
+    # The repository owner may still open pull requests; everyone else is asked to work in a fork.
+    if: github.event.pull_request.user.login != github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Pull Request and Comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr comment "$PR_URL" --body "Thank you for your interest! As described in our repository policy, this repository is **Fork only**. We do not accept Pull Requests to the main repository. Please feel free to develop and maintain your changes in your own fork under the MIT License."
+          gh pr close "$PR_URL"

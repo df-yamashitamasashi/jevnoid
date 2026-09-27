@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#05070b">
+  <!-- Paint dark before any stylesheet or script arrives, so reloads never flash white -->
+  <style>html, body { background-color: #05070b; color-scheme: dark; } .canvas-3d-box { background: #020306; }</style>
+  <title>JEVNOID // 3D Autonomous Digital Life Terrarium</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="/vendor/three.min.js" defer></script>
+  <script src="/vendor/OrbitControls.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-title">JEVNOID // 3D DIGITAL LIFE TERRARIUM</div>
+      <span class="brand-badge" id="badge-jev">Multi-Habitat Isolated Space</span>
+      <span class="brand-badge" id="badge-tierra" style="background: rgba(6, 214, 160, 0.1); border-color: rgba(6, 214, 160, 0.3); color: var(--gaia-emerald);">Tierra 1990 // Shannon H=0.0</span>
+    </div>
+    <!-- Strictly Zero-Input Autonomous Indicator -->
+    <div class="deck-mode-indicator" id="deck-mode-indicator">
+      <span class="status-dot"></span>
+      <span id="deck-mode-label">AUTONOMOUS ECOSYSTEM (ZERO-INPUT OBSERVATION)</span>
+    </div>
+
+    <!-- Past growth trials, preserved as read-only snapshots -->
+    <div class="archive-menu">
+      <button type="button" class="archive-toggle" id="archive-toggle" data-toggle="archive-menu" aria-haspopup="true" aria-expanded="false">
+        🗂 Archive
+      </button>
+      <div class="archive-dropdown" id="archive-dropdown" hidden>
+        <button type="button" class="archive-item active" data-view="live">● Live Ecosystem</button>
+        <button type="button" class="archive-item" data-view="trial-01">Trial #1 — 2026-09-27 (pre-reset)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Habitat Slider Header Bar -->
+  <div class="habitat-bar">
+    <button class="nav-arrow-btn" data-nav="prev">
+      <span>❮ PREV HABITAT</span>
+    </button>
+    <div class="habitat-title-box">
+      <span class="habitat-species-name" id="bar-species-name">Gaia-noid (Biosphere)</span>
+      <span class="habitat-telos" id="bar-telos">Planetary ecosystem and climate intelligence assimilation</span>
+    </div>
+    <button class="nav-arrow-btn" data-nav="next">
+      <span>NEXT HABITAT ❯</span>
+    </button>
+  </div>
+
+  <main>
+    <!-- Left: 3D Terrarium Viewport & Organism Vitals -->
+    <div class="terrarium-viewport">
+      <div class="canvas-3d-box" id="canvas-3d-container">
+        <!-- In-Canvas Left/Right Arrows -->
+        <div class="slider-nav-left" data-nav="prev" title="Previous Habitat (← Key)">❮</div>
+        <div class="slider-nav-right" data-nav="next" title="Next Habitat (→ Key)">❯</div>
+
+        <!-- Zoom buttons: for trackpad-less setups where scroll/pinch-to-zoom isn't available -->
+        <div class="zoom-controls">
+          <button type="button" class="zoom-btn" data-zoom="in" title="Zoom In" aria-label="Zoom in">+</button>
+          <button type="button" class="zoom-btn" data-zoom="out" title="Zoom Out" aria-label="Zoom out">−</button>
+        </div>
+
+        <!-- Overlays -->
+        <div class="viewport-overlay">
+          <div class="habitat-badge" id="canvas-habitat-badge">🌿 HABITAT 1/4 : GAIA-NOID</div>
+          <span>ORIGIN: Central Nucleus at (0, 0, 0)</span>
+          <span class="hint-pointer">INTERACTION: Drag to Rotate 360°, Scroll to Zoom, [←][→] to Slide Habitat</span>
+          <span class="hint-touch">INTERACTION: Drag to Rotate, Pinch to Zoom, ❮ ❯ to Slide Habitat</span>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots-container" id="slider-dots">
+          <div class="slider-dot active" style="--dot-color: var(--gaia-emerald);" data-habitat="0" title="Gaia-noid"></div>
+          <div class="slider-dot" style="--dot-color: var(--theos-gold);" data-habitat="1" title="Theos-noid"></div>
+          <div class="slider-dot" style="--dot-color: var(--cosmo-violet);" data-habitat="2" title="Cosmo-noid"></div>
+          <div class="slider-dot" style="--dot-color: var(--info-cyan);" data-habitat="3" title="Info-Grazer"></div>
+        </div>
+      </div>
+
+      <!-- Quick Switcher Tabs -->
+      <div class="habitat-tabs" id="habitat-tabs">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Spotlight Bio-Card of Currently Viewed Organism -->
+      <div class="spotlight-card" id="spotlight-card">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Right Sidebar: Neural Pulse Stream & Crystals Vault -->
+    <div class="sidebar-panel">
+      <!-- Neural Stream -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <span>Neural Pulse Stream (Jev System One)</span>
+          <span style="font-size: 0.68rem; color: var(--gaia-emerald);" id="pulse-rate-badge">● PULSE / 10 MIN</span>
+        </div>
+        <div class="pulse-stream" id="pulse-stream">
+          <div class="pulse-item" style="color: var(--text-dim);">[00:00:00] Multi-habitat terrariums initialized. 4 organisms respire from origin (0, 0, 0).</div>
+        </div>
+      </div>
+
+      <!-- Assimilated Knowledge Crystals -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <span>Assimilated Knowledge Strata</span>
+          <span style="font-size: 0.72rem; color: var(--text-dim);" id="crystal-count">0 crystals</span>
+        </div>
+        <div class="crystals-feed" id="crystals-feed">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Sponsored text links (hidden while sponsors.json is empty) -->
+      <aside class="panel-box signal-relay" id="signal-relay" aria-label="Sponsored links" hidden>
+        <div class="panel-header">
+          <span>Signal Relay</span>
+          <span class="pr-tag">PR</span>
+        </div>
+        <ul class="signal-relay-list" id="signal-relay-list"></ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 jevnoid</span>
+  </footer>
+</body>
+</html>
